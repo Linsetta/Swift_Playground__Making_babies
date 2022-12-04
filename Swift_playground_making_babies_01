@@ -1,0 +1,88 @@
+enum Gender: CaseIterable {
+  case boy     
+  case girl     
+  case dreamer     
+  case agender    
+  case androgyne    
+  static func random() -> Gender {        
+    return allCases.randomElement()!       
+    }
+}
+var names = ["Leo", "Donat", "Napoleo", "Alex"]
+var age = [3, 5, 8, 12, 1]
+let randomGen = Gender.random()
+let randomName = names.randomElement()!
+let randomAge = age.randomElement()!
+
+struct Baby {  
+    var name = randomName
+    var ageMonths = randomAge
+    var gender = randomGen
+    func getDetails(){
+    print ("I am baby \(gender) \(name) \(ageMonths) months old.")
+    }
+}
+var baby1 = Baby()
+baby1.getDetails()
+
+// how to make different baby? commented out code below creates the same baby..
+//var baby2 = Baby()
+//baby2.getDetails()
+
+
+class Toy {
+    var toyName: String
+    var toyColor: String
+    var toySize: String
+    init(toyName: String, toyColor: String, toySize: String) {
+        self.toyName = toyName
+        self.toyColor = toyColor
+        self.toySize = toySize
+    }
+}
+var Toy1 = Toy(toyName: "ball", toyColor: "green", toySize: "tiny")
+var Toy2 = Toy(toyName: "train", toyColor: "multicolored", toySize: "medium")
+var Toy3 = Toy(toyName: "farm", toyColor: "green", toySize: "large")
+var actions = ["play", "cry","eat", "drink", "sleep", "change diaper"]var toys = ["ball", "train", "farm"]
+actions.remove(at: 1)
+actions.insert("makeMess", at: 1)
+var randomAction = ""
+repeat{
+    randomAction = actions.randomElement()!
+    //baby.getDetails()
+    print ("Now I want", randomAction)
+    babyAction()
+    print(baby1.name,"what do you want to do next?")
+}
+while  randomAction != "makeMess"
+
+func babyAction(){
+    if randomAction == "eat" || randomAction == "drink"  {
+       print (baby1.name, "see you at the kitchen")
+       }         
+    if randomAction == "play" {
+       playGame()
+       print(baby1.name, "which toy would you like to play next? Your toys are: ")
+       for element in toys {
+       print(element)
+       }
+       playGame()
+    }
+    if randomAction == "sleep" || randomAction == "change diaper" {
+        print (baby1.name, "lets go to see mama")
+    } 
+}
+func playGame(){
+    let randomToy = toys.randomElement()!
+    print("Baby wants to play with ", randomToy)
+    switch randomToy{
+    case "ball":
+        print("Baby wants to play with \(Toy2.toySize)  \(Toy2.toyColor) \(Toy2.toyName). Let's play soccer")
+    case "train":
+       print("Baby wants to play with \(Toy2.toySize)  \(Toy2.toyColor) \(Toy2.toyName). Let's play Railway Express game")
+    case "farm":
+        print("Baby wants to play with \(Toy1.toySize)  \(Toy1.toyColor) \(Toy1.toyName). Let's play Farmland game")        
+    default:
+        print ("What do you want to do instead?")        
+    }
+}
