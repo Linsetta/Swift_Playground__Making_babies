@@ -1,0 +1,54 @@
+import Subsonic
+import SwiftUI
+
+struct ContentView: View {
+    @State var text = ""
+    @State var title = "Hello Babies!"
+    let answerAnalyser = AnswerAnalyser()
+    let babies = ["Boy", "Girl", "Dreamer", "Alien"]
+    let columns = [
+        GridItem(.adaptive(minimum: 250))
+    ]
+    var body: some View {
+        VStack {
+            Image(systemName: 
+                    "face.smiling.fill")
+            .imageScale(.large)
+            .foregroundColor(.accentColor)
+            .padding(.top, 50)
+            Text (title)
+                .font(.largeTitle)
+            TextField("Do you want to meet a new friend?", text: $text)
+                .multilineTextAlignment(.center)
+                .frame(width: 300)
+            Spacer()
+            
+            //Button("Submit"){
+            //submit()
+            //}
+            //func submit() {
+            //title = "Hello\(answerAnalyser.processAnswer(text: text))!"
+            //}
+            
+            NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns) { 
+                    ForEach(babies, id: \.self){ baby in 
+                        Button {
+                            play(sound: "\(baby).m4a")
+                        } label: {
+                            Image(baby)
+                                .resizable()
+                                .scaledToFill()
+                                .cornerRadius(70)
+                                .padding(.horizontal)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Babies")
+        }
+        .navigationViewStyle(.stack)
+    }
+}
+}
